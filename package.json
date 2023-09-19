@@ -1,0 +1,31 @@
+{
+  "name": "cosmos-health",
+  "version": "1.0.0",
+  "author": "MatPB <mat@thedenom.org>",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "prettier": "prettier --write \"**/*.{js,ts,json,md}\""
+  },
+  "devDependencies": {
+    "@types/node": "^20.6.0",
+    "@types/ws": "^8.5.5",
+    "prettier": "^3.0.3",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "@cosmjs/crypto": "^0.31.1",
+    "@cosmjs/encoding": "^0.31.1",
+    "@cosmjs/stargate": "^0.31.1",
+    "@cosmjs/tendermint-rpc": "^0.31.1",
+    "axios": "^1.5.0",
+    "commander": "^11.0.0",
+    "cosmjs-types": "^0.8.0",
+    "dotenv": "^16.3.1",
+    "ts-retry": "^4.2.2",
+    "tslog": "^4.9.2",
+    "typescript": "^5.2.2",
+    "ws": "^8.14.1"
+  }
+}
