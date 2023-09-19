@@ -33,13 +33,13 @@ export class Config {
   private parse(env: any): Config {
     const blockSpeedThreshold = parseInt(env.BLOCK_SPEED_THRESHOLD || "1000");
     const blockSpeedInfoInterval = parseInt(
-      env.BLOCK_SPEED_INFO_INTERVAL || "100",
+      env.BLOCK_SPEED_INFO_INTERVAL || "100"
     );
     const endpoints = Config.validateStringArray("ENDPOINTS", env, 1);
     const validators = Config.validateStringArray(
       "VALIDATORS_WATCHLIST",
       env,
-      0,
+      0
     );
     const events = Config.validateStringArray("EVENTS_WATCHLIST", env, 1).map(
       (event) => {
@@ -48,7 +48,7 @@ export class Config {
           throw new Error(`Invalid event: ${event}`);
         }
         return event as ConfigEvent;
-      },
+      }
     );
 
     return {
@@ -65,7 +65,7 @@ export class Config {
     env: any,
     values: string[],
     required: boolean,
-    defaultValue?: string,
+    defaultValue?: string
   ): string => {
     if (required && (!(key in env) || env[key]!.length === 0)) {
       throw new Error(`Missing required env: ${key}`);
@@ -86,16 +86,19 @@ export class Config {
   static validateStringArray = (
     key: string,
     env: any,
-    min: number = 0,
+    min: number = 0
   ): string[] => {
-    if (!(key in env) || (env[key]!.length === 0 && min > 0)) {
+    if (min > 0 && (!(key in env) || env[key]!.length === 0)) {
       throw new Error(`Missing required env: ${key}`);
+    }
+    if (!(key in env) || env[key]!.length === 0) {
+      return [];
     }
     const value = env[key]!;
     const items = value.split(",");
     if (items.length < min) {
       throw new Error(
-        `Invalid env: ${key}. Expected at least ${min} items, got ${items.length}`,
+        `Invalid env: ${key}. Expected at least ${min} items, got ${items.length}`
       );
     }
     return items;
